@@ -1,0 +1,6 @@
+The knapsack problem assigns items into the backpack.
+
+The backpack has a fixed capacity.
+There are a number of items, each with its own weight and value added to the holder.
+
+The goal is to maximize the value of the bag, without exceeding the capacity/weight limit.
