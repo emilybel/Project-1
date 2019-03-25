@@ -1,10 +1,7 @@
-The knapsack problem assigns items into the backpack.
 
-The backpack has a fixed capacity.
-There are a number of items, each with its own weight and value added to the holder.
-
-The goal is to maximize the value of the bag, without exceeding the capacity/weight limit.
-
+The worker assignment problem assigns a list of workers to a list of jobs.
+Each worker must have 1 job.
+Each job has 1 worker.
 
 ----------------------------------------------------------------------------------------------
 
