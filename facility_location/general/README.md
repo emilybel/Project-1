@@ -5,6 +5,8 @@ Select facility location(s) that minimizes the costs of shipping to all customer
 
 -----------------------------------------------------------------------------
 
+To run this code, enter the directory where the facility_location.py script is located.
 
+Copy and paste the following line into the terminal. Replace "-m 5" with the actual number of warehouses and "-n 5" with the actual number of customers for the problem.
 
 python facility_location.py -m 5 -n 5 -f facility_location -l facility_location -d 1
