@@ -67,6 +67,7 @@ random.random() sets a value between 0 and 1.
 
 c = defaultdict(make_dict)
 u = defaultdict(make_dict)
+b = {}
 
 # c(k) unit cost of flow through arc k[i][j]
 # b(i) net supply (arc flow out - arc flow in) at node i
@@ -75,10 +76,12 @@ u = defaultdict(make_dict)
 
 Ko = {}					# set of arcs leaving node i, creates an empty dictionary.... uses dictionary because the index starts at 1, lists start at 0
 Kt = {}					# set of arcs ending at node i
-k = 1 
+
 for i in V:				#for every new node i, a new list is created.
 	Ko[i] = []
 	Kt[i] = []
+k = 1 
+for i in V:				#for every new node i, a new list is created.
 	for j in V:
 		if (j != i):
 			c[k] = random.random()  	# cost to travel on that arc
