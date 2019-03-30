@@ -441,7 +441,7 @@ def export(g, numConstr, numDvars, numSlacks, packed, imgFullGS, imgNoSlackGS, i
 	# Write info to file(s)
 	
 	# Create the subfolder, if it doesn't already exist
-	folder = '%s/Projects/Project-1/output/%s_%s' % (HOME_DIRECTORY, folder, n)	
+	folder = '%s/Projects/tspml/output/%s_%s' % (HOME_DIRECTORY, folder, n)	
 
 	if (not os.path.isdir(folder)):
 		print("%s does not exist" % (folder))

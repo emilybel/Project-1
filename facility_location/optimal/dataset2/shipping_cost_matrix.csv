@@ -1,0 +1,11 @@
+%,The first row indicates the customer number,,,,,,
+%,The first column indicates the warehouse number,,,,,,
+%,The entry of the matrix tells the cost of shipping between warehouse I and customer j,,,,,,
+M,101,102,103,104,105,106,107
+1,8,21,42,12,37,25,31
+2,21,10,31,24,40,14,18
+3,42,31,4,14,32,36,9
+4,12,24,14,7,12,15,21
+5,37,40,32,12,10,21,37
+6,14,24,36,14,21,33,17
+7,18,29,17,41,12,18,42
