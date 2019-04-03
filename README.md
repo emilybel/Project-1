@@ -1,6 +1,7 @@
 # Python Programming Project
-
-Spring 2019: Emily Belote
+IE 494 Spring 2019: Emily Belote with Dr. Murray
+University at Buffalo
+Industrial and Systems Engineering
 
 
 # Project Objective
@@ -20,11 +21,140 @@ To learn how to code and solve Linear Programming problems in Python.
 ####Optimal Formulation:
 - facilty_complete_data.py : (Jensen pg 232)
 
+# Directory Structure
+After the repository has been downloaded, the Project-1 directory should look like this. 
 
-#Formulation Specifics
+- There will be a file called common.py which is necessary for the general formulations, this README.md document and a folder for each LP name.
+- `facilty_location` determines the optimal warehouse location in order to  serve a list of customers.
+	- There are two types of facility location problems: the general formulation and the optimization problem.
+	- Within the `optimal`folder, there are multiple `dataset` folders which are used to store data for different FLP's. Each folder contains the same file names, but opening the files will reveal different data.
+- `knapsack_problem` determines whic items should be packed in a finite bag.
+	- There are two types of knapscak problems. One for discrete item weights, and another for continuous item weights.
+- `network_flow`determines the shipping pattern between nodes in order to meet each node's supply and demand needs.
+- `worker_assignment` determines how workers should be assigned to a list of jobs.
+- `output` contains all of the graphs and data that is saved for each iteration of the general formulation problems.
+
+
+~~~
+├── common.py
+├── facility_location
+│   ├── general
+│   │   ├── common.py
+│   │   ├── facility_location.py
+│   │   └── README.md
+│   └── optimal
+│       ├── dataset1
+│       │   ├── demand.csv
+│       │   ├── extra.csv
+│       │   ├── README.md
+│       │   └── shipping_cost_matrix.csv
+│       ├── dataset2
+│       │   ├── demand.csv
+│       │   ├── extra.csv
+│       │   └── shipping_cost_matrix.csv
+│       ├── facility_complete_data.py
+│       └── README.md
+├── knapsack_problem
+│   ├── common.py
+│   ├── knapsack_continuous.py
+│   ├── knapsack.py
+│   └── README.md
+├── network_flow
+│   ├── common.py
+│   ├── common.pyc
+│   ├── gurobi.log
+│   ├── output
+│   ├── README.md
+│   └── supply_demand_NFP.py
+├── output
+├── README.md
+└── worker_assignment
+    ├── common.py
+    ├── README.md
+    └── worker_assignment.py
+
+
+~~~
+Output:
+	- Each time a code is run, a folder will be saved with the name `problemname_n` where n represents the number of items in the formulation.
+	- There will be 5 `imgX.png` files where X is replaced by the name of the image and files called `packed.csv` and `params.csv`.
+When running any of the general formulation problems, a folder of output will be created. The contents of `output` will look like this.
+- This shows that each problem can be run multiple times with different values of n to produce different results.
+
+~~~
+├── knapsack_20
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+├── knapsack_200
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+├── knapsack_cont_200
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+├── Network_2450
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+├── tsp_mtz_20
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+├── work_assign_5
+│   ├── imgFullBGR.png
+│   ├── imgFullGS.png
+│   ├── imgNonzerosBW.png
+│   ├── imgNoSlackBGR.png
+│   ├── imgNoSlackGS.png
+│   ├── packed.csv
+│   └── params.csv
+└── work_assign_50
+    ├── imgFullBGR.png
+    ├── imgFullGS.png
+    ├── imgNonzerosBW.png
+    ├── imgNoSlackBGR.png
+    ├── imgNoSlackGS.png
+    ├── packed.csv
+    └── params.csv
+
+~~~
+
+# Running the Code
+
+- In order to run the code, first enter the proper directory
+	- `cd Projects/Project-1/%S` (Replace %s with the folder name of the desired problem)
+- Then insert the proper run command as found within the code itself.
+	- For example, to run the facility_location.py script, use the command
+	`python facility_location.py -m 5 -n 5 -f facility_location -l facility_location -d 1`
+	- The run command can be found in each script after the 'arguments' section.
+	
+
+# Formulation Specifics
 The components required to formulate a Python LP are outlined below. Specific sections of code come from *facility_location.py* 
 
-###Opening Lines
+### Opening Lines
 ---
 Each python script will begin with a fairly similar block of code which sets up the problem and allows the code to work. For the general formulations, there will be no answer to the problem, but the code is set up to create output graphs that demonstrate the structure of the problem. This information is used by the University at Buffalo Industrial Engineering Department's student research. Therefore importing common, the variables g and dprime, and the arguments f, l and d, are specific to the UB research project.
 ~~~
