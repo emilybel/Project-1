@@ -116,7 +116,7 @@ for i in V:
 Name the model
 '''
 #minimize the cost of having each worker in each job
-m = Model('work_assign')
+m = Model('supply_demand')
 m.ModelSense = GRB.MINIMIZE
 
 
