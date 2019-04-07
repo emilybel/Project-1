@@ -7,8 +7,6 @@ Industrial and Systems Engineering
 # Project Objective
 To learn how to code and solve Linear Programming problems in Python.
 
-
-
 #Formulations Studied
 
 ####General Formulation:
@@ -40,7 +38,9 @@ After the repository has been downloaded, the Project-1 directory should look li
 ├── facility_location
 │   ├── general
 │   │   ├── common.py
+│   │   ├── common.pyc
 │   │   ├── facility_location.py
+│   │   ├── gurobi.log
 │   │   └── README.md
 │   └── optimal
 │       ├── dataset1
@@ -61,9 +61,6 @@ After the repository has been downloaded, the Project-1 directory should look li
 │   └── README.md
 ├── network_flow
 │   ├── common.py
-│   ├── common.pyc
-│   ├── gurobi.log
-│   ├── output
 │   ├── README.md
 │   └── supply_demand_NFP.py
 ├── output
@@ -74,9 +71,10 @@ After the repository has been downloaded, the Project-1 directory should look li
     └── worker_assignment.py
 
 
+
 ~~~
 Output:
-	- Each time a code is run, a folder will be saved with the name `problemname_n` where n represents the number of items in the formulation.
+	- Each time a code is run, a folder will be saved with the name `ProblemName_n` where n represents the number of items in the formulation.
 	- There will be 5 `imgX.png` files where X is replaced by the name of the image and files called `packed.csv` and `params.csv`.
 When running any of the general formulation problems, a folder of output will be created. The contents of `output` will look like this.
 - This shows that each problem can be run multiple times with different values of n to produce different results.
@@ -315,7 +313,7 @@ with open('dataset1/demand.csv', 'r') as csvfile:
 ~~~
 ### Objective Function
 ---
-The objective function is solved to obtain the "answer". It is an expression that combines Decision Variables and Parameters that impact the value of the Objective Function. This expression typically represents the total cost of the project, or the benefits received as a result of solving the problem. The goal will be to minimize the objective function if the expression represents a total cost, or the maximize the objective function if the expression represents the value or benefit of a project.
+The objective function is solved to obtain the optimal value of the problem. It is an expression that combines Decision Variables and Parameters that impact the value of the Objective Function. This expression typically represents the total cost of the project, or the benefits received as a result of solving the problem. The goal will be to minimize the objective function if the expression represents a total cost, or the maximize the objective function if the expression represents the value or benefit of a project.
 
 - For the problems that I have studied, the objective functions are fairly simple so they are handled within each Decision Variable.
 
@@ -386,16 +384,16 @@ for j in C:
 	m.addConstr(quicksum(decvarx[i][j] for i in M) == d[j], "Constr.1.%d" % (j))
 	g.append(1)
 ~~~
-Next, the total amount shipped from each warehouse cannot be greater than the actual capacity of the warehouse. The for loop creates an equation for the capacity of each warehouse. Each equation sums the total amount shipped from warehouse i to all j customers and makes sure that it does not exceed the total capacity of warehouse i.
+Next, the total amount shipped from each warehouse cannot be greater than the actualsize of the warehouse. The for loop creates an equation for the capacity of each warehouse. Each equation sums the total amount shipped from warehouse i to all j customers and makes sure that it does not exceed the total capacity of warehouse i.
 ~~~
-# Supply must not exceed capacity of warehouse
+# Supply must not exceed size of warehouse
 for i in W:
 	m.addConstr(quicksum(decvarx[i][j] for j in N)<= decvarz[i], "Constr.2.%d" %(i))
 	g.append(2)
 ~~~
 Finally, there is a constraint on the size of the warehouse that can be built. For each warehouse, the size of the warehouse that is build z[i] cannot exceed the maximum capacity u[i] of warehouse i if it is in fact built y[i].
 ~~~
-# capacity of warehouse is less than max capacity of site i
+# size of warehouse is less than max capacity of site i
 for i in W:
 	m.addConstr(decvarz[i] <= (u[i]*decvary[i]), "Constr.3.%d" %(i))
 	g.append(3)
@@ -404,13 +402,13 @@ for i in W:
 # Output
 ###Optimal Formulation
 ---
-If we wish to find the optimal solution, the command m.optimize() finds the optimal solution for the model. Then, we want the actual values of the objective function, and all of the decision variables to print out to the terminal so we have the solution.
+If we wish to find the optimal solution, the command m.optimize() finds the optimal solution for the model. Then, we want the actual values of the objective function and all of the decision variables to print out to the terminal so we have the solution.
 
 Some formulations are infeasible or unbounded therefore we will print a statement to the terminal expressing if this is the case. 
 
 ~~~
 m.update()
-m.optimize()		
+m.optimize() 
 
 
 # from http://www.gurobi.com/documentation/8.1/examples/workforce1_py.html
@@ -422,7 +420,7 @@ if status == GRB.Status.UNBOUNDED:
 ~~~
 
 In the event that a solution can be found, the values will be printed.
-First, loop over all warehouses. IF the value of y[i] is greater than 0, then warehouse i should be build. The statement "Build a warehouse at location i" will print to the terminal and the warehouse number will replace the letter i. The warehouse will also have a positive value capacity. The statement "The capacity of warehouse 'i' is 'z'" will print and the warehouse number, and capacity will replace i and z. 
+First, loop over all warehouses. IF the value of y[i] is greater than 0, then warehouse i should be build. The statement "Build a warehouse at location i" will print to the terminal and the warehouse number will replace the letter i. The warehouse will also have a positive value size. The statement "The size of warehouse 'i' is 'z'" will print and the warehouse number, and capacity will replace i and z. 
 
 Then loop over all warehouses and customers to determine the amount of product shipped from one to the other. If a positive quantity of x[i][j] is shipped,the terminal will display "Warehouse 'i' will shipp 'x[i][j]' units to customer 'j'" with the appropriate values replacing the variables.
 
@@ -436,7 +434,7 @@ if status == GRB.Status.OPTIMAL:
 			print ('Build a warehouse at location %d' %(i))
 			#print decvary[i].x
 		if decvarz[i].x >= 0.0001:
-			print ('The capacity of warehouse %d is %f' %(i, decvarz[i].x))
+			print ('The size of warehouse %d is %f' %(i, decvarz[i].x))
 			#print decvarz[i].x
 		
 	for i in W:

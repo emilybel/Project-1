@@ -1,0 +1,10 @@
+label,Network
+numNodes,2450
+numGroups,1
+numConstr,50
+numDecVars (without slacks),2450
+num slacks/surplus,0
+GSneg,128,191
+GSpos,192,255
+HSVneg,0,255,102,255
+HSVpos,70,255,102,255
