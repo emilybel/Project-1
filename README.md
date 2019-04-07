@@ -7,8 +7,6 @@ Industrial and Systems Engineering
 # Project Objective
 To learn how to code and solve Linear Programming problems in Python.
 
-
-
 #Formulations Studied
 
 ####General Formulation:
